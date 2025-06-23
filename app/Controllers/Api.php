@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\Users;
+use CodeIgniter\RESTful\ResourceController;
+
 
 class Api extends BaseController
 {
@@ -10,6 +12,17 @@ class Api extends BaseController
   public function getUsers()
   {
     $users = Users::all();
+    return $this->response->setJSON($users);
+  }
+
+  // GET /users/yesterday
+  public function getUsersYesterday()
+  {
+    // Let's get yesterday's date
+    $yesterday = date('Y-m-d', strtotime('-1 day'));
+
+    $users = Users::whereDate('created_at', $yesterday)->get();
+
     return $this->response->setJSON($users);
   }
 
@@ -40,10 +53,9 @@ class Api extends BaseController
   // PUT /users/{id}
   public function putUser($id)
   {
-    $data = $this->request->getRawInput();
-    $name = $data['name'] ?? null;
-    $email = $data['email'] ?? null;
-    $phone = $data['phone'] ?? null;
+    $name = $this->request->getVar('name');
+    $email = $this->request->getVar('email');
+    $phone = $this->request->getVar('phone');
 
     if (!$id) {
       return $this->response->setStatusCode(400)->setJSON(['error' => 'ID de l\'utilisateur manquant']);
@@ -83,4 +95,3 @@ class Api extends BaseController
     return $this->response->setJSON(['Succes' => true]);
   }
 }
-   // return $this->response->setJSON(['success' => true]);
