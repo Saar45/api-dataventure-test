@@ -110,7 +110,7 @@ Vous pouvez donc accéder à l'API depuis n'importe quel client HTTP (navigateur
 
 Pour automatiser la récupération des utilisateurs inscrits la veille, un endpoint API dédié a été mis en place :
 
-### GET `/api/users/yesterday`
+### GET `/api/usersyesterday`
 
 Cet endpoint renvoie la liste des utilisateurs dont la date d'inscription (`created_at`) correspond à la veille de la date actuelle.
 
