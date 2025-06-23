@@ -1,6 +1,17 @@
 # Documentation de l'API Utilisateurs
 
-Cette API permet de gérer les utilisateurs avec les opérations CRUD (Créer, Lire, Mettre à jour, Supprimer).
+Cette API est hébergée à distance sur un serveur web accessible publiquement.  
+**URL de base distante** : `https://siomende.fr/sarr/api-dataventure-test/`
+
+Vous pouvez donc accéder à l'API depuis n'importe quel client HTTP (navigateur, Postman, curl, etc.) sans avoir besoin d'un environnement local.
+
+## Technologies utilisées
+
+- **PHP** : Langage principal du backend.
+- **CodeIgniter** : Framework PHP utilisé pour la structure du projet et la gestion des routes.
+- **Eloquent ORM (Laravel)** : Utilisé pour l'accès et la manipulation de la base de données via le modèle `Users`.
+- **MySQL** : Système de gestion de base de données relationnelle, hébergé sur [freesqldatabase.com](https://www.freesqldatabase.com/).
+  - La base de données distante permet à l'API d'être totalement opérationnelle en ligne, sans dépendance à une base locale.
 
 ## Endpoints
 
@@ -92,6 +103,38 @@ Cette API permet de gérer les utilisateurs avec les opérations CRUD (Créer, L
     ```json
     { "error": "Utilisateur introuvable" }
     ```
+
+---
+
+## Tâche planifiée (cron job)
+
+Pour automatiser la récupération des utilisateurs inscrits la veille, un endpoint API dédié a été mis en place :
+
+### GET `/api/users/yesterday`
+
+Cet endpoint renvoie la liste des utilisateurs dont la date d'inscription (`created_at`) correspond à la veille de la date actuelle.
+
+#### Exemple de réponse :
+```json
+[
+  {
+    "id": 5,
+    "name": "Alice",
+    "email": "alice@example.com",
+    "phone": "0600000001",
+    "created_at": "2024-06-22 10:00:00",
+  },
+  ...
+]
+```
+
+### Utilisation dans une tâche cron
+
+#### Exemple de ligne cron :
+```bash
+0 8 * * * curl -s https://siomende.fr/sarr/api-dataventure-test/api/users/yesterday >> /var/log/users_yesterday.log
+```
+Cette commande enverra la liste des utilisateurs inscrits la veille dans le fichier `/var/log/users_yesterday.log` chaque matin à 8h.
 
 ---
 
