@@ -41,7 +41,7 @@ Vous pouvez donc accéder à l'API depuis n'importe quel client HTTP (navigateur
 
 ### 2. Créer un utilisateur
 
-- **URL** : `/users`
+- **URL** : `/user`
 - **Méthode** : `POST`
 - **Body (x-www-form-urlencoded ou JSON)** :
   - `name` (requis)
@@ -68,7 +68,7 @@ Vous pouvez donc accéder à l'API depuis n'importe quel client HTTP (navigateur
 
 ### 3. Modifier un utilisateur
 
-- **URL** : `/users/{id}`
+- **URL** : `/user/{id}`
 - **Méthode** : `PUT`
 - **Body (JSON)** :
   - `name` (optionnel)
@@ -92,7 +92,7 @@ Vous pouvez donc accéder à l'API depuis n'importe quel client HTTP (navigateur
 
 ### 4. Supprimer un utilisateur
 
-- **URL** : `/users/{id}`
+- **URL** : `/user/{id}`
 - **Méthode** : `DELETE`
 - **Réponse** :
   - `200 OK`  
