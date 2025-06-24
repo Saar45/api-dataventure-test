@@ -132,7 +132,7 @@ Cet endpoint renvoie la liste des utilisateurs dont la date d'inscription (`crea
 
 #### Exemple de ligne cron :
 ```bash
-0 8 * * * curl -s https://siomende.fr/sarr/api-dataventure-test/api/users/yesterday >> /var/log/users_yesterday.log
+0 8 * * * curl -s https://siomende.fr/sarr/api-dataventure-test/api/usersyesterday >> /var/log/users_yesterday.log
 ```
 Cette commande enverra la liste des utilisateurs inscrits la veille dans le fichier `/var/log/users_yesterday.log` chaque matin à 8h.
 
